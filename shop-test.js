@@ -62,4 +62,20 @@ describe('shop.js', function() {
 
         steps(done);
     });
+
+    it('should callback an error when item has no price defined', function(done) {
+
+        function test() {
+            var cart = shop.createCart();
+            var item = {};
+
+            cart.add(item, function(err) {
+                if(err) throw err;
+            });
+        }
+
+        expect(test).to.throw('Item to add to cart must have a price');
+
+        done();
+    });
 });
