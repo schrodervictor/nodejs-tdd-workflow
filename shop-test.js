@@ -28,4 +28,23 @@ describe('shop.js', function() {
 
         done();
     });
+
+    it('should calcutate the subtotal', function(done) {
+
+        var cart = shop.createCart();
+
+        var item1 = {
+            "price":1
+        };
+
+        var item2 = {
+            "price": 3
+        };
+
+        cart.add(item1);
+        cart.add(item2);
+
+        expect(cart.getSubtotal()).to.equal(4);
+        done();
+    });
 });
