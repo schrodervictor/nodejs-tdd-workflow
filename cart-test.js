@@ -13,4 +13,18 @@ describe('cart.js', function() {
 
         done();
     });
+
+    it('should not affect other cart\'s contents', function(done) {
+
+        var cart1 = require('./cart');
+        var cart2 = require('./cart');
+
+        var item = {"price":2};
+
+        cart1.add(item);
+
+        expect(cart1.getAll()).to.not.equal(cart2.getAll());
+
+        done();
+    });
 });
