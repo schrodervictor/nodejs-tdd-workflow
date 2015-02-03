@@ -8,11 +8,11 @@ describe('shop.js', function() {
 
         var item = {"something":1};
 
-        cart.add(item);
+        cart.add(item, function() {
+            expect(cart.getAll()).to.include(item);
+            done();
+        });
 
-        expect(cart.getAll()).to.include(item);
-
-        done();
     });
 
     it('should not affect other cart\'s contents', function(done) {
@@ -22,11 +22,11 @@ describe('shop.js', function() {
 
         var item = {"price":2};
 
-        cart1.add(item);
+        cart1.add(item, function() {
+            expect(cart1.getAll()).to.not.equal(cart2.getAll());
+            done();
+        });
 
-        expect(cart1.getAll()).to.not.equal(cart2.getAll());
-
-        done();
     });
 
     it('should calcutate the subtotal', function(done) {
@@ -41,10 +41,25 @@ describe('shop.js', function() {
             "price": 3
         };
 
-        cart.add(item1);
-        cart.add(item2);
+        function steps(callback) {
+            cart.add(item1, function(err) {
+                if(err) return callback(err);
+                step1(callback);
+            });
+        }
 
-        expect(cart.getSubtotal()).to.equal(4);
-        done();
+        function step1(callback) {
+            cart.add(item2, function(err) {
+                if(err) return callback(err);
+                step2(callback);
+            });
+        }
+
+        function step2(callback) {
+            expect(cart.getSubtotal()).to.equal(4);
+            callback();
+        }
+
+        steps(done);
     });
 });
