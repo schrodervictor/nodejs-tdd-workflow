@@ -6,7 +6,7 @@ describe('shop.js', function() {
 
         var cart = shop.createCart();
 
-        var item = {"something":1};
+        var item = {"price":1};
 
         cart.add(item, function() {
             expect(cart.getAll()).to.include(item);
