@@ -1,23 +1,24 @@
 var expect = require('chai').expect;
+var cart = require('./cart');
 
 describe('cart.js', function() {
     it('should be able to add an item', function(done) {
 
-        var cart = require('./cart');
+        var cart1 = cart.createCart();
 
         var item = {"something":1};
 
-        cart.add(item);
+        cart1.add(item);
 
-        expect(cart.getAll()).to.include(item);
+        expect(cart1.getAll()).to.include(item);
 
         done();
     });
 
     it('should not affect other cart\'s contents', function(done) {
 
-        var cart1 = require('./cart');
-        var cart2 = require('./cart');
+        var cart1 = cart.createCart();
+        var cart2 = cart.createCart();
 
         var item = {"price":2};
 
