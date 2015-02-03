@@ -2,7 +2,11 @@ module.exports.createCart = function() {
 
     return {
         contents: [],
-        add: function(item, callback) {
+        add: function(item, callback) { // callback = function(err){}
+
+            if(!('price' in item))
+                return callback(new Error('Item to add to cart must have a price'));
+
             this.contents.push(item);
             return callback();
         },
