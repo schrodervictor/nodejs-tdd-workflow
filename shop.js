@@ -2,8 +2,9 @@ module.exports.createCart = function() {
 
     return {
         contents: [],
-        add: function(item) {
+        add: function(item, callback) {
             this.contents.push(item);
+            return callback();
         },
         getAll: function() {
             return this.contents;
