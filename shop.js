@@ -20,6 +20,10 @@ module.exports.createCart = function() {
                 },
                 0 // Initial value
             );
+        },
+        empty: function(callback) {
+            this.contents = [];
+            callback();
         }
     };
 };
