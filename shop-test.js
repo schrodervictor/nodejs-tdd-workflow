@@ -78,4 +78,30 @@ describe('shop.js', function() {
 
         done();
     });
+
+    it('should be able to empty the cart contents', function(done) {
+
+        var cart = shop.createCart();
+
+        var item = {"price":10};
+
+        function steps(callback) {
+            cart.add(item, function(err) {
+                if(err) return callback(err);
+                expect(cart.getAll()).to.include(item);
+                step1(callback);
+            });
+        }
+
+        function step1(callback) {
+            cart.empty(function(err) {
+                if(err) return callback(err);
+                expect(cart.getAll()).to.be.empty();
+                callback();
+            });
+        }
+
+        steps(done);
+
+    });
 });
