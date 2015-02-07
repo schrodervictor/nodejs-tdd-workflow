@@ -13,7 +13,7 @@ module.exports.createCart = function() {
         getAll: function() {
             return this.contents;
         },
-        count: function(callback) {
+        count: function(callback) { // callback = function(err, quantity) {}
             var quantity = this.contents.length;
             return callback(null, quantity);
         },
@@ -25,7 +25,7 @@ module.exports.createCart = function() {
                 0 // Initial value
             );
         },
-        empty: function(callback) {
+        empty: function(callback) { // callback = function(err) {}
             this.contents = [];
             callback();
         }
