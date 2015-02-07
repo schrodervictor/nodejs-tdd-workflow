@@ -104,4 +104,53 @@ describe('shop.js', function() {
         steps(done);
 
     });
+
+    it('should show the amount of items in the cart', function(done) {
+
+        var cart = shop.createCart();
+
+        var item1 = {"price":10};
+        var item2 = {"price":20};
+        var item3 = {"price":30};
+        var item4 = {"price":40};
+
+        function steps(callback) {
+            cart.add(item1, function(err) {
+                if(err) return callback(err);
+                step1(callback);
+            });
+        }
+
+        function step1(callback) {
+            cart.add(item2, function(err) {
+                if(err) return callback(err);
+                step2(callback);
+            });
+        }
+
+        function step2(callback) {
+            cart.add(item3, function(err) {
+                if(err) return callback(err);
+                step3(callback);
+            });
+        }
+
+        function step3(callback) {
+            cart.add(item4, function(err) {
+                if(err) return callback(err);
+                step4(callback);
+            });
+        }
+
+        function step4(callback) {
+            cart.count(function(err, quantity) {
+                if(err) return callback(err);
+                expect(quantity).to.equal(4);
+                callback();
+            });
+        }
+
+        steps(done);
+
+    });
 });
