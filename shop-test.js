@@ -56,8 +56,11 @@ describe('shop.js', function() {
         }
 
         function step2(callback) {
-            expect(cart.getSubtotal()).to.equal(4);
-            callback();
+            cart.getSubtotal(function(err, subtotal) {
+                if(err) return callback(err);
+                expect(subtotal).to.equal(4);
+                callback();
+            });
         }
 
         steps(done);
@@ -80,7 +83,6 @@ describe('shop.js', function() {
     });
 
     it('should be able to empty the cart contents', function(done) {
-
         var cart = shop.createCart();
 
         var item = {"price":10};
