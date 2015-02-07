@@ -13,6 +13,10 @@ module.exports.createCart = function() {
         getAll: function() {
             return this.contents;
         },
+        count: function(callback) {
+            var quantity = this.contents.length;
+            return callback(null, quantity);
+        },
         getSubtotal: function() {
             return this.contents.reduce(
                 function(sum, elem) {
