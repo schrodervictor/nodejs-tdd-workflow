@@ -26,11 +26,29 @@ describe('shop.js', function() {
 
         var item = {"price":2};
 
-        cart1.add(item, function() {
-            expect(cart1.getAll()).to.not.equal(cart2.getAll());
-            done();
-        });
+        function steps(callback) {
+            cart1.add(item, function(err) {
+                if(err) return callback(err);
+                step1(callback);
+            });
+        }
 
+        function step1(callback) {
+            cart1.getAll(function(err, contents1) {
+                if(err) return callback(err);
+                step2(contents1, callback);
+            });
+        }
+
+        function step2(contents1, callback) {
+            cart2.getAll(function(err, contents2) {
+                if(err) return callback(err);
+                expect(contents1).to.not.equal(contents2);
+                callback();
+            });
+        }
+
+        steps(done);
     });
 
     it('should calcutate the subtotal', function(done) {
@@ -94,15 +112,29 @@ describe('shop.js', function() {
         function steps(callback) {
             cart.add(item, function(err) {
                 if(err) return callback(err);
-                expect(cart.getAll()).to.include(item);
                 step1(callback);
             });
         }
 
         function step1(callback) {
+            cart.getAll(function(err, contents) {
+                if(err) return callback(err);
+                expect(contents).to.include(item);
+                step2(callback);
+            });
+        }
+
+        function step2(callback) {
             cart.empty(function(err) {
                 if(err) return callback(err);
-                expect(cart.getAll()).to.be.empty();
+                step3(callback);
+            });
+        }
+
+        function step3(callback) {
+            cart.getAll(function(err, contents) {
+                if(err) return callback(err);
+                expect(contents).to.be.empty();
                 callback();
             });
         }
