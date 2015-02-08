@@ -10,6 +10,17 @@ module.exports.createCart = function() {
             this.contents.push(item);
             return callback();
         },
+        remove: function(query, callback) {
+            this.contents = this.contents.filter(function(item, index, contents) {
+                var match = true;
+                for(var key in query) {
+                    match = match && (item[key] === query[key]);
+                    if(!match) break;
+                }
+                return !match;
+            });
+            callback();
+        },
         getAll: function(callback) { // callback = function(err, cartContents) {}
             var cartContents = this.contents;
             return callback(null, cartContents);
