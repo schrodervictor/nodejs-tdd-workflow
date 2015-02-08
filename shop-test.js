@@ -219,12 +219,60 @@ describe('shop.js', function() {
         }
 
         function step2(callback) {
-            cart.remove(item2, function(err) {
+            cart.remove({"price": 20}, function(err) {
                 if(err) return callback(err);
                 cart.getAll(function(err, contents) {
                     if(err) return callback(err);
                     expect(contents).to.include(item1);
                     expect(contents).to.not.include(item2);
+                    callback();
+                });
+            });
+        }
+
+        steps(done);
+
+    });
+
+    it('remove method should remove only items that match all query\'s key:value pairs', function(done) {
+
+        var cart = shop.createCart();
+
+        var item1 = {"id": 1, "price":10};
+        var item2 = {"price":20};
+        var item3 = {"id": 3, "price":20};
+
+        function steps(callback) {
+            cart.add(item1, function(err) {
+                if(err) return callback(err);
+                cart.add(item2, function(err) {
+                    if(err) return callback(err);
+                    cart.add(item3, function(err) {
+                        if(err) return callback(err);
+                        step1(callback);
+                    });
+                });
+            });
+        }
+
+        function step1(callback) {
+            cart.getAll(function(err, contents) {
+                if(err) return callback(err);
+                expect(contents).to.include(item1);
+                expect(contents).to.include(item2);
+                expect(contents).to.include(item3);
+                step2(callback);
+            });
+        }
+
+        function step2(callback) {
+            cart.remove({"id": 1}, function(err) {
+                if(err) return callback(err);
+                cart.getAll(function(err, contents) {
+                    if(err) return callback(err);
+                    expect(contents).to.not.include(item1);
+                    expect(contents).to.include(item2);
+                    expect(contents).to.include(item3);
                     callback();
                 });
             });
