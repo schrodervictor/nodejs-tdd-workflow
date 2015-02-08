@@ -191,4 +191,46 @@ describe('shop.js', function() {
         steps(done);
 
     });
+
+    it('should be able to remove a specific item from the cart', function(done) {
+
+        var cart = shop.createCart();
+
+        var item1 = {"price":10};
+        var item2 = {"price":20};
+
+        function steps(callback) {
+            cart.add(item1, function(err) {
+                if(err) return callback(err);
+                step1(callback);
+            });
+        }
+
+        function step1(callback) {
+            cart.add(item2, function(err) {
+                if(err) return callback(err);
+                cart.getAll(function(err, contents) {
+                    if(err) return callback(err);
+                    expect(contents).to.include(item1);
+                    expect(contents).to.include(item2);
+                    step2(callback);
+                });
+            });
+        }
+
+        function step2(callback) {
+            cart.remove(item2, function(err) {
+                if(err) return callback(err);
+                cart.getAll(function(err, contents) {
+                    if(err) return callback(err);
+                    expect(contents).to.include(item1);
+                    expect(contents).to.not.include(item2);
+                    callback();
+                });
+            });
+        }
+
+        steps(done);
+
+    });
 });
