@@ -14,6 +14,7 @@ module.exports.createCart = function() {
             this.contents = this.contents.filter(function(item, index, contents) {
                 var match = true;
                 for(var key in query) {
+                    // if the item doesn't have the key, it'll be kept
                     match = match && (item[key] === query[key]);
                     if(!match) break;
                 }
