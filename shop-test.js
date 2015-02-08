@@ -8,9 +8,13 @@ describe('shop.js', function() {
 
         var item = {"price":1};
 
-        cart.add(item, function() {
-            expect(cart.getAll()).to.include(item);
-            done();
+        cart.add(item, function(err) {
+            if(err) return done(err);
+            cart.getAll(function(err, cartContents) {
+                if(err) return done(err);
+                expect(cartContents).to.include(item);
+                done();
+            });
         });
 
     });
