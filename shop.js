@@ -10,8 +10,9 @@ module.exports.createCart = function() {
             this.contents.push(item);
             return callback();
         },
-        getAll: function() {
-            return this.contents;
+        getAll: function(callback) { // callback = function(err, cartContents) {}
+            var cartContents = this.contents;
+            return callback(null, cartContents);
         },
         count: function(callback) { // callback = function(err, quantity) {}
             var quantity = this.contents.length;
