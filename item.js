@@ -13,6 +13,8 @@ module.exports.create = function(data) {
             var match = true;
 
             for(var key in query) {
+                // if the item doesn't have the key, it's not a match
+                // because (undefined !== 'something')
                 match = match && (this.data[key] === query[key]);
                 if(!match) break;
             }
