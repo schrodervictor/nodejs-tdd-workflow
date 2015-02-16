@@ -1,18 +1,19 @@
 var expect = require('chai').expect;
 var shop = require('../shop');
+var item = require('../item');
 
 describe('shop.js', function() {
     it('should be able to add an item', function(done) {
 
         var cart = shop.createCart();
 
-        var item = {"price":1};
+        var item1 = item.create({"price":1});
 
-        cart.add(item, function(err) {
+        cart.add(item1, function(err) {
             if(err) return done(err);
             cart.getAll(function(err, cartContents) {
                 if(err) return done(err);
-                expect(cartContents).to.include(item);
+                expect(cartContents).to.include(item1);
                 done();
             });
         });
@@ -24,10 +25,10 @@ describe('shop.js', function() {
         var cart1 = shop.createCart();
         var cart2 = shop.createCart();
 
-        var item = {"price":2};
+        var item1 = item.create({"price":2});
 
         function steps(callback) {
-            cart1.add(item, function(err) {
+            cart1.add(item1, function(err) {
                 if(err) return callback(err);
                 step1(callback);
             });
@@ -55,13 +56,13 @@ describe('shop.js', function() {
 
         var cart = shop.createCart();
 
-        var item1 = {
+        var item1 = item.create({
             "price":1
-        };
+        });
 
-        var item2 = {
+        var item2 = item.create({
             "price": 3
-        };
+        });
 
         function steps(callback) {
             cart.add(item1, function(err) {
@@ -92,9 +93,9 @@ describe('shop.js', function() {
 
         function test() {
             var cart = shop.createCart();
-            var item = {};
+            var item1 = item.create({});
 
-            cart.add(item, function(err) {
+            cart.add(item1, function(err) {
                 if(err) throw err;
             });
         }
@@ -107,10 +108,10 @@ describe('shop.js', function() {
     it('should be able to empty the cart contents', function(done) {
         var cart = shop.createCart();
 
-        var item = {"price":10};
+        var item1 = item.create({"price":10});
 
         function steps(callback) {
-            cart.add(item, function(err) {
+            cart.add(item1, function(err) {
                 if(err) return callback(err);
                 step1(callback);
             });
@@ -119,7 +120,7 @@ describe('shop.js', function() {
         function step1(callback) {
             cart.getAll(function(err, contents) {
                 if(err) return callback(err);
-                expect(contents).to.include(item);
+                expect(contents).to.include(item1);
                 step2(callback);
             });
         }
@@ -147,10 +148,10 @@ describe('shop.js', function() {
 
         var cart = shop.createCart();
 
-        var item1 = {"price":10};
-        var item2 = {"price":20};
-        var item3 = {"price":30};
-        var item4 = {"price":40};
+        var item1 = item.create({"price":10});
+        var item2 = item.create({"price":20});
+        var item3 = item.create({"price":30});
+        var item4 = item.create({"price":40});
 
         function steps(callback) {
             cart.add(item1, function(err) {
@@ -196,8 +197,8 @@ describe('shop.js', function() {
 
         var cart = shop.createCart();
 
-        var item1 = {"price":10};
-        var item2 = {"price":20};
+        var item1 = item.create({"price":10});
+        var item2 = item.create({"price":20});
 
         function steps(callback) {
             cart.add(item1, function(err) {
@@ -238,9 +239,9 @@ describe('shop.js', function() {
 
         var cart = shop.createCart();
 
-        var item1 = {"id": 1, "price":10};
-        var item2 = {"price":20};
-        var item3 = {"id": 3, "price":20};
+        var item1 = item.create({"id": 1, "price":10});
+        var item2 = item.create({"price":20});
+        var item3 = item.create({"id": 3, "price":20});
 
         function steps(callback) {
             cart.add(item1, function(err) {
