@@ -3,7 +3,10 @@ module.exports.create = function(data) {
     var item = {
         data: {},
         getPrice: function() {
-            return this.data.price;
+            if('price' in this.data)
+                return this.data.price;
+            else
+                return null;
         }
     };
 
