@@ -36,7 +36,7 @@ module.exports.createCart = function() {
         getSubtotal: function(callback) { // callback = function(err, subtotal)
             var subtotal = this.contents.reduce(
                 function(sum, elem) {
-                    return sum + elem.price;
+                    return sum + elem.getPrice();
                 },
                 0 // Initial value
             );
