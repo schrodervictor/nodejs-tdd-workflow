@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var item = require('./item');
+var item = require('../item');
 
 describe('item.js', function() {
     it('should create new items', function(done) {

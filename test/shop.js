@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var shop = require('./shop');
+var shop = require('../shop');
 
 describe('shop.js', function() {
     it('should be able to add an item', function(done) {
