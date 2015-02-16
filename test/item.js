@@ -46,6 +46,15 @@ describe('item.js', function() {
             done();
         });
 
+        it('should return the item\'s price', function(done) {
+
+            var item1 = item.create({price: 42});
+
+            expect(item1.getPrice()).to.equal(42);
+
+            done();
+        });
+
     });
 });
 
