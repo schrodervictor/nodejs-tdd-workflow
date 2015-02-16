@@ -7,7 +7,8 @@ module.exports.create = function(data) {
                 return this.data.price;
             else
                 return null;
-        }
+        },
+        match: function(query) {}
     };
 
     for (var prop in data) item.data[prop] = data[prop];
