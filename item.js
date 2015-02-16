@@ -1,4 +1,8 @@
-module.exports.create = function() {
+module.exports.create = function(data) {
 
-    return {};
+    var item = {};
+
+    for (var prop in data) item[prop] = data[prop];
+
+    return item;
 }
