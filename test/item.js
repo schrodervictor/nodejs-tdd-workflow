@@ -77,6 +77,25 @@ describe('item.js', function() {
 
             done();
         });
+
+        it('should return true when the item has ALL query\'s properties matching respective values', function(done) {
+
+            var item1 = item.create({
+                name: 'Test1',
+                price: 42,
+                description: 'This should be ignored in the comparison'
+            });
+
+            var query = {
+                name: 'Test1',
+                price: 42
+            };
+
+            expect(item1.match(query)).to.be.true;
+
+            done();
+        });
+
     });
 });
 
