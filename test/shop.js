@@ -89,7 +89,7 @@ describe('shop.js', function() {
         steps(done);
     });
 
-    it('should callback an error when item has no price defined', function(done) {
+    it.skip('should callback an error when item has no price defined', function(done) {
 
         function test() {
             var cart = shop.createCart();

@@ -6,9 +6,6 @@ module.exports.createCart = function() {
 
         add: function(item, callback) { // callback = function(err){}
 
-            if(!('price' in item))
-                return callback(new Error('Item to add to cart must have a price'));
-
             this.contents.push(item);
             return callback();
         },
