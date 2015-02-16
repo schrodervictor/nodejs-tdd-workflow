@@ -27,9 +27,9 @@ describe('item.js', function() {
             description: 'Test item1 description'
         });
 
-        expect(item1).to.have.property('name', 'Test item1');
-        expect(item1).to.have.property('price', 10);
-        expect(item1).to.have.property('description', 'Test item1 description');
+        expect(item1).to.have.deep.property('data.name', 'Test item1');
+        expect(item1).to.have.deep.property('data.price', 10);
+        expect(item1).to.have.deep.property('data.description', 'Test item1 description');
 
         done();
     });
