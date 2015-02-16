@@ -18,5 +18,20 @@ describe('item.js', function() {
         expect(item1).to.not.equal(item2);
         done();
     });
+
+    it('should be able to store data about itself', function(done) {
+
+        var item1 = item.create({
+            name: 'Test item1',
+            price: 10,
+            description: 'Test item1 description'
+        });
+
+        expect(item1).to.have.property('name', 'Test item1');
+        expect(item1).to.have.property('price', 10);
+        expect(item1).to.have.property('description', 'Test item1 description');
+
+        done();
+    });
 });
 
