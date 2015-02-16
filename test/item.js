@@ -10,16 +10,6 @@ describe('item.js', function() {
         done();
     });
 
-    it('should expose a getPrice method', function(done) {
-
-        var item1 = item.create();
-
-        expect(item1).to.have.property('getPrice')
-            .that.is.a('function');
-
-        done();
-    });
-
     it('items should be independent from each other', function(done) {
 
         var item1 = item.create();
@@ -42,6 +32,20 @@ describe('item.js', function() {
         expect(item1).to.have.deep.property('data.description', 'Test item1 description');
 
         done();
+    });
+
+    describe('#getPrice()', function() {
+
+        it('should be exposed as a public method', function(done) {
+
+            var item1 = item.create();
+
+            expect(item1).to.have.property('getPrice')
+                .that.is.a('function');
+
+            done();
+        });
+
     });
 });
 
