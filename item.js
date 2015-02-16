@@ -1,7 +1,8 @@
 module.exports.create = function(data) {
 
     var item = {
-        data: {}
+        data: {},
+        getPrice: function() {}
     };
 
     for (var prop in data) item.data[prop] = data[prop];
