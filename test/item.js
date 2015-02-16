@@ -55,6 +55,15 @@ describe('item.js', function() {
             done();
         });
 
+        it('should return null when there\'s no defined price', function(done) {
+
+            var item1 = item.create({});
+
+            expect(item1.getPrice()).to.be.null;
+
+            done();
+        });
+
     });
 });
 
