@@ -65,5 +65,18 @@ describe('item.js', function() {
         });
 
     });
+
+    describe('#match(query)', function() {
+
+        it('should be exposed as a public method', function(done) {
+
+            var item1 = item.create();
+
+            expect(item1).to.have.property('match')
+                .that.is.a('function');
+
+            done();
+        });
+    });
 });
 
