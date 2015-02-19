@@ -6,8 +6,12 @@ module.exports.createCart = function() {
 
         add: function(item, callback) { // callback = function(err){}
 
-            this.contents.push(item);
-            return callback();
+            if(typeof item.getPrice === 'function') {
+                this.contents.push(item);
+                return callback();
+            }
+
+            return callback(new Error('Item to add to cart must expose a getPrice method'))
         },
 
         remove: function(query, callback) { // callback = function(err) {}
