@@ -53,18 +53,18 @@ describe('shop.js', function() {
 
         });
 
-        it.skip('should callback an error when item has no price defined', function(done) {
+        it('should callback an error when item has no getPrice method', function(done) {
 
             function test() {
                 var cart = shop.createCart();
-                var item1 = item.create({});
+                var item1 = {};
 
                 cart.add(item1, function(err) {
                     if(err) throw err;
                 });
             }
 
-            expect(test).to.throw('Item to add to cart must have a price');
+            expect(test).to.throw('Item to add to cart must expose a getPrice method');
 
             done();
         });
