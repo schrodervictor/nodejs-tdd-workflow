@@ -31,3 +31,5 @@ module.exports.create = function(data) {
 
     return new Item(data);
 }
+
+module.exports.constructor = Item;
