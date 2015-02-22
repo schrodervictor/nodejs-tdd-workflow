@@ -2,6 +2,14 @@ var expect = require('chai').expect;
 var item = require('../item');
 
 describe('item.js', function() {
+    it('should be an instance of "Item"', function(done) {
+
+        var item1 = item.create();
+
+        expect(item1).to.be.an.instanceOf(Item);
+        done();
+    });
+
     it('should create new items', function(done) {
 
         var item1 = item.create();
