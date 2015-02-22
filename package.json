@@ -4,5 +4,8 @@
     "devDependencies": {
         "mocha": "*",
         "chai": "*"
+    },
+    "scripts": {
+        "test": "./node_modules/mocha/bin/mocha"
     }
 }
