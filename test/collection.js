@@ -15,6 +15,23 @@ describe('collection.js', function() {
         });
 
     });
+    describe('#add(item)', function() {
+
+        it('should accept the inclusion of items', function(done) {
+
+            var collection1 = collection.create();
+            var item1 = item.create({
+                name: 'Item 1',
+                price: 20
+            });
+
+            collection1.add(item1);
+
+            expect(collection1.getAll()).to.include(item1);
+
+        });
+
+    });
 });
 
 
