@@ -29,6 +29,8 @@ describe('collection.js', function() {
 
             expect(collection1.getAll()).to.include(item1);
 
+            done();
+
         });
 
     });
