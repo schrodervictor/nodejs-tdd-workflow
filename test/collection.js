@@ -34,6 +34,37 @@ describe('collection.js', function() {
         });
 
     });
+
+    describe('#getAll()', function() {
+
+        it('should return an array of items', function(done) {
+
+            var collection1 = collection.create();
+            var item1 = item.create({
+                name: 'Item 1',
+                price: 20
+            });
+
+            collection1.add(item1);
+
+            expect(collection1.getAll()).to.be.instanceOf(Array)
+                .and.to.be.not.empty;
+
+            done();
+
+        });
+
+        it('should return an empty array when have no items', function(done) {
+
+            var collection1 = collection.create();
+
+            expect(collection1.getAll()).to.be.instanceOf(Array)
+                .and.to.be.empty;
+
+            done();
+
+        });
+    });
 });
 
 
